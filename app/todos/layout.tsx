@@ -1,0 +1,66 @@
+"use client";
+
+import { useState } from "react";
+import { MdAddCircle } from "react-icons/md";
+
+
+
+
+const AddPopup = ({handleAddTodo, setShowAddPopup }: {handleAddTodo: (todosText:string) => void, setShowAddPopup: (show: boolean) => void }) =>{
+
+    const [todosText, setTodosText] = useState<string>("");
+    return <div className="flex items-center justify-center fixed top-0 left-0 w-full h-full bg-[#00000066] p-4 rounded-lg shadow-lg">
+       <div className="w-1/3 bg-white p-4 rounded-md">
+         <h2 className="text-xl font-bold mb-4">Add New Todo</h2>
+        <input type="text" placeholder="Todo Title" onChange={(e)=> setTodosText(e.target.value)} className="w-full p-2 border border-gray-300 rounded mb-4" />
+        <div className="flex justify-end gap-2">
+            <button type="reset" className="px-4 py-2 bg-gray-300 text-gray-700 rounded" onClick={()=> setShowAddPopup(false)}>Cancel</button>
+            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded" onClick={()=>{handleAddTodo(todosText)}}>Add</button>
+        </div>
+       </div>
+    </div>
+}
+
+
+export default function TodosLayout({
+  children,
+}: Readonly<{ children: React.ReactNode }>) {
+
+const [showAddPopup, setShowAddPopup] = useState(false);
+
+const handleAddTodo = async(todosText:string) =>{
+    const payload={
+        title:todosText
+    }
+    try{
+        const res = await fetch("http://localhost:3000/api/todos",{
+            method:"POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body:JSON.stringify(payload)
+        })
+        const data= await res.json()
+        console.log(res,data)
+    }catch(err)
+    {
+        console.error(err)
+    }
+
+}
+
+  return<>
+  <div>
+    {children}
+  </div>
+  <button className="flex items-center gap-2 fixed bottom-8 right-8 px-4 py-2 bg-blue-500 text-white text-md rounded-lg shadow-lg cursor-pointer"
+   type="button"
+   onClick={()=>setShowAddPopup(true)}
+   >
+    <p>Add Todo</p>
+    <MdAddCircle size={20}/>
+    
+  </button>
+  {showAddPopup && <AddPopup handleAddTodo={handleAddTodo} setShowAddPopup={setShowAddPopup} />}
+  </>;
+}
