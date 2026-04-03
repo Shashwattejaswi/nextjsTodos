@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { readFile, writeFile } from "node:fs/promises";
 import {todos} from "./testData.json"
+import { title } from "node:process";
 export async function GET(nextRequest:Request)
 {
     // console.log(nextRequest.url);
@@ -22,9 +23,35 @@ export async function POST(nextRequest:Request)
     const body = await nextRequest.json();
     console.log("Request body:", body);
 
-    const exisitingData = await readFile("app/api/todos/testData.json", "utf-8");
-    const parsedData = JSON.parse(exisitingData);
+    if(!body?.title)
+    {
+        return new Response(JSON.stringify({status:false,message:"Title is required"}),{status:400,headers:{"Content-Type":"application/json"}})
+    }
+    console.log(process.cwd())
+    try{
+        const exisitingData = await readFile(`${process.cwd()}/app/api/todos/testData.json`, "utf-8");
+        const parsedData = JSON.parse(exisitingData);
+        const newTodos = {
+            id:parsedData.todos.length+1,
+            title:body.title,
+            completed:false
+        }
+        const updatedParsedData = {...parsedData,todos:[...parsedData.todos,newTodos]}
+        try{
+            await writeFile("app/api/todos/testData.json",JSON.stringify(updatedParsedData),"utf-8")
 
-    return new Response(JSON.stringify({status:"created"}),{status:201,headers:{"Content-Type":"application/json"}})
+        }catch(err)
+        {
+            console.error("Error writing data:", err);
+            return new Response(JSON.stringify({status:false,message:"Internal Server Error"}),{status:500,headers:{"Content-Type":"application/json"}})
+        }
+
+    }catch(err)
+    {
+        console.error("Error reading existing data:", err);
+        return new Response(JSON.stringify({status:false,message:"Internal Server Error"}),{status:500,headers:{"Content-Type":"application/json"}})
+    }
+
+    return new Response(JSON.stringify({status:true,message:"Created"}),{status:201,headers:{"Content-Type":"application/json"}})
 
 }
