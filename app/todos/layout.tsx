@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdAddCircle } from "react-icons/md";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 
 
@@ -17,8 +17,8 @@ const AddPopup = ({handleAddTodo, setShowAddPopup }: {handleAddTodo: (todosText:
          <h2 className="text-xl font-bold mb-4">Add New Todo</h2>
         <input type="text" placeholder="Todo Title" value={todosText} onChange={(e)=> setTodosText(e.target.value)} className="w-full p-2 border border-gray-300 rounded mb-4" />
         <div className="flex justify-end gap-2">
-            <button type="reset" className="px-4 py-2 bg-gray-300 text-gray-700 rounded" onClick={()=> setShowAddPopup(false)}>Cancel</button>
-            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded" onClick={()=>{handleAddTodo(todosText); setTodosText("");}}>Add</button>
+            <button type="reset" className="cursor-pointer px-4 py-2 bg-gray-300 text-gray-700 rounded" onClick={()=> setShowAddPopup(false)}>Cancel</button>
+            <button type="submit" className="cursor-pointer px-4 py-2 bg-blue-500 text-white rounded" onClick={()=>{handleAddTodo(todosText); setTodosText("");}}>Add</button>
         </div>
        </div>
     </div>
@@ -29,9 +29,24 @@ export default function TodosLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
 
+
 const [showAddPopup, setShowAddPopup] = useState(false);
 const router = useRouter();
+
+const validation=({todosText}:{todosText:string}) =>{
+
+    if(todosText === "")
+    {
+        toast.error("Please add Todos Label");
+        return false
+    }
+    return true
+}
 const handleAddTodo = async(todosText:string) =>{
+    
+    if(!validation({todosText}))
+        return;
+
     const payload={
         title:todosText
     }
@@ -74,5 +89,7 @@ const handleAddTodo = async(todosText:string) =>{
     
   </button>
   {showAddPopup && <AddPopup handleAddTodo={handleAddTodo} setShowAddPopup={setShowAddPopup} />}
-  </>;
+  <ToastContainer position="top-right" autoClose={3000} theme="colored" />
+
+  </>
 }

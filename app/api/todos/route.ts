@@ -2,6 +2,14 @@ import { NextResponse } from "next/server";
 import { readFile, writeFile } from "node:fs/promises";
 import {todos} from "./testData.json"
 import { title } from "node:process";
+
+interface Todo {
+    id: number;
+    title: string;
+    completed: boolean;
+    createTime?:Date;
+    updateTime?:Date;
+}
 export async function GET(nextRequest:Request)
 {
     // console.log(nextRequest.url);
@@ -19,7 +27,6 @@ export async function GET(nextRequest:Request)
 
 export async function POST(nextRequest:Request)
 {
-    console.log("POST request received");
     const body = await nextRequest.json();
     console.log("Request body:", body);
 
@@ -31,10 +38,13 @@ export async function POST(nextRequest:Request)
     try{
         const exisitingData = await readFile(`${process.cwd()}/app/api/todos/testData.json`, "utf-8");
         const parsedData = JSON.parse(exisitingData);
-        const newTodos = {
+        const newTodos: Todo = {
             id:parsedData.todos.length+1,
             title:body.title,
-            completed:false
+            completed:false,
+            createTime:new Date(),
+            updateTime:new Date()
+
         }
         const updatedParsedData = {...parsedData,todos:[...parsedData.todos,newTodos]}
         try{
