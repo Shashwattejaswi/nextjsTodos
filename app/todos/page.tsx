@@ -1,6 +1,7 @@
 
 "use server"
 
+import ParentComponent from "./Component/parent";
 import TodoChip from "./todoChip";
 
 const Page = async() => {
@@ -17,15 +18,7 @@ const Page = async() => {
             throw new Error(data.message || "Failed to fetch todos");
         }
           return (
-        <div className="">
-            <h1 className="w-full text-center p-4 text-2xl font-bold">Todo List</h1>
-            {/* Todo list content goes here */}
-            <div className="w-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {data?.data.map((todo: { id: number; title: string; completed: boolean }) => (
-                    <TodoChip key={todo.id} todo={todo} />
-                ))}
-            </div>
-        </div>
+           <ParentComponent data={data.data} />
     )
     }catch(err){
         console.error("Error fetching todos:", err);

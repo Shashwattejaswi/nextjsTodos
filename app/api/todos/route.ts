@@ -65,3 +65,4 @@ export async function POST(nextRequest:Request)
     return new Response(JSON.stringify({status:true,message:"Created"}),{status:201,headers:{"Content-Type":"application/json"}})
 
 }
+
