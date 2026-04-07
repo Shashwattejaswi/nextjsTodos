@@ -1,6 +1,5 @@
 "use client"
 
-import { Interface } from "readline";
 import TodoChip from "../todoChip";
 import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
@@ -15,6 +14,11 @@ const ParentComponent = ({data}:{data:Todo[]}) =>{
     const router = useRouter();
 
  const handleEditTodos = async(todo: Todo) =>{
+
+    if(todo.completed === true){
+        return;
+    }
+
         try{
             const res = await fetch(`http://localhost:3000/api/todos/${todo.id}`,{
                 method:"PUT",

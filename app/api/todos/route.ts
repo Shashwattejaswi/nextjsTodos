@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
 import { readFile, writeFile } from "node:fs/promises";
 import {todos} from "./testData.json"
-import { title } from "node:process";
 
 interface Todo {
-    id: number;
+    id: string;
     title: string;
     completed: boolean;
     createTime?:Date;
@@ -21,7 +20,7 @@ export async function GET(nextRequest:Request)
     //         "Content-Type":"image/png"
     //     }
     // });
-
+    
     return Response.json({message:"OK",data:[...todos]})
 }
 
@@ -39,7 +38,7 @@ export async function POST(nextRequest:Request)
         const exisitingData = await readFile(`${process.cwd()}/app/api/todos/testData.json`, "utf-8");
         const parsedData = JSON.parse(exisitingData);
         const newTodos: Todo = {
-            id:parsedData.todos.length+1,
+            id:crypto.randomUUID(), // Generate a unique ID for the new todo
             title:body.title,
             completed:false,
             createTime:new Date(),
@@ -48,7 +47,7 @@ export async function POST(nextRequest:Request)
         }
         const updatedParsedData = {...parsedData,todos:[...parsedData.todos,newTodos]}
         try{
-            await writeFile("app/api/todos/testData.json",JSON.stringify(updatedParsedData),"utf-8")
+            await writeFile("app/api/todos/testData.json",JSON.stringify(updatedParsedData,null,2),"utf-8")
 
         }catch(err)
         {

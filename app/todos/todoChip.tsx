@@ -22,7 +22,7 @@ const TodoChip =({todo,handleEditTodos}: {todo: Todo, handleEditTodos: (todo: To
             <span className={todo.completed ? "line-through text-gray-500" : "text-gray-800"}>
                 {todo.title}
             </span>
-            <input type="checkbox" checked={todo.completed} onChange={()=>handleEditTodos(todo)} className="ml-4"/>
+            <input type="checkbox" checked={todo.completed} disabled={todo.completed} onChange={()=>handleEditTodos(todo)} className="ml-4"/>
         </div>
         <p className="text-xs text-gray-400">{formattedCreateTime}{(formattedUpdateTime && (formattedCreateTime !== formattedUpdateTime)) && `- ${formattedUpdateTime}`}</p>
 

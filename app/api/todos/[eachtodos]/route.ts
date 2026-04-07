@@ -32,7 +32,7 @@ export async function PUT ( request: Request, { params }: { params: { eachtodos:
         console.log(updatedJson)
         
         try{
-            const writeJSONFiles = await writeFile(`${process.cwd()}/app/api/todos/testData.json`,JSON.stringify(updatedJson),'utf-8');
+            const writeJSONFiles = await writeFile(`${process.cwd()}/app/api/todos/testData.json`,JSON.stringify(updatedJson,null,2),'utf-8');
 
         }catch(err)
         {
