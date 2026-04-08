@@ -19,7 +19,7 @@ export async function PUT ( request: Request, { params }: { params: { eachtodos:
     const body = await request.json();
     console.log("eachtodos",eachtodos , body);
 
-    const todoId = parseInt(eachtodos, 10);
+    
 
     try{
 
@@ -27,7 +27,7 @@ export async function PUT ( request: Request, { params }: { params: { eachtodos:
         
         const parseJson = JSON.parse(readJSONTodos)
         console.log(parseJson.todos)
-        const updatedTodos = parseJson.todos?.map((each:any,index:number)=> each.id === Number(eachtodos)?{...each,completed:!each.completed,updateTime:new Date()}:each)
+        const updatedTodos = parseJson.todos?.map((each:any,index:number)=> each.id === eachtodos?{...each,completed:!each.completed,updateTime:new Date()}:each)
         const updatedJson = {...parseJson,todos:updatedTodos};
         console.log(updatedJson)
         
