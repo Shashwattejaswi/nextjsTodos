@@ -20,6 +20,11 @@
       "completed": true,
       "createTime": "2026-04-04T17:47:45.534Z",
       "updateTime": "2026-04-07T17:12:36.810Z"
+    },
+    {
+      "id": 62,
+      "compressedTodo": "H4sIAAAAAAAACm3LOw6DMBAFwKugVxvkD9hhz+GKDrErYgkcRBaliHL3KH36mTcKg6I30KKbgDAzl7o2VV6N3ktdnzBYHvuxiQqD9LzEYDllVsll/w1vfWxt39qYXSI3kLWdG9IEg+vgP+6WXaQwUghdn8YJny/Z8+5PhgAAAA==",
+      "deletedStamp": "2026-04-09T16:51:22.714Z"
     }
   ]
 }

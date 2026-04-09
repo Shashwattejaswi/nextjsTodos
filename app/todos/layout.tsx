@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FaArchive } from "react-icons/fa";
 import { MdAddCircle } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -80,14 +81,26 @@ const handleAddTodo = async(todosText:string) =>{
   <div>
     {children}
   </div>
-  <button className="flex items-center gap-2 fixed bottom-8 right-8 px-4 py-2 bg-blue-500 text-white text-md rounded-lg shadow-lg cursor-pointer"
+  <div className="flex gap-4 items-center fixed bottom-8 right-8">
+
+  <button className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white text-md rounded-lg shadow-lg cursor-pointer"
    type="button"
    onClick={()=>setShowAddPopup(true)}
+   title="Add Todo"
    >
     <p>Add Todo</p>
     <MdAddCircle size={20}/>
     
   </button>
+  <button className="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white text-md rounded-lg shadow-lg cursor-pointer"
+   type="button"
+   title="Archive Todos"
+   onClick={()=>{}}
+   >
+    <FaArchive size={20}/>
+    
+  </button>
+</div>
   {showAddPopup && <AddPopup handleAddTodo={handleAddTodo} setShowAddPopup={setShowAddPopup} />}
   <ToastContainer position="top-right" autoClose={3000} theme="colored" />
 

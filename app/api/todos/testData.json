@@ -1,13 +1,6 @@
 {
   "todos": [
     {
-      "id": 62,
-      "title": "adding new things",
-      "completed": true,
-      "createTime": "2026-04-06T17:15:00.157Z",
-      "updateTime": "2026-04-08T16:39:33.479Z"
-    },
-    {
       "id": 63,
       "title": "Reading Books",
       "completed": true,
@@ -55,6 +48,27 @@
       "completed": false,
       "createTime": "2026-04-08T17:13:38.549Z",
       "updateTime": "2026-04-08T17:13:38.549Z"
+    },
+    {
+      "id": "47e225df-2d0b-4997-bb49-3647f18eb157",
+      "title": "store deleted todos in compressed form",
+      "completed": true,
+      "createTime": "2026-04-08T17:29:10.953Z",
+      "updateTime": "2026-04-09T16:54:22.767Z"
+    },
+    {
+      "id": "3424f248-5757-4a4c-849f-dc6720cae6b2",
+      "title": "add archive btn to show completed todos date wise",
+      "completed": false,
+      "createTime": "2026-04-08T17:29:52.502Z",
+      "updateTime": "2026-04-08T17:29:52.502Z"
+    },
+    {
+      "id": "20a72b7a-3f23-4707-9403-06e38f2f3356",
+      "title": "adding delete and edit btn in todos",
+      "completed": false,
+      "createTime": "2026-04-08T17:30:22.127Z",
+      "updateTime": "2026-04-08T17:30:22.127Z"
     }
   ]
 }

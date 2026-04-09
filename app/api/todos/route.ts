@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { readFile, writeFile } from "node:fs/promises";
 import {todos} from "./testData.json"
+import zlib from "zlib";
 
 interface Todo {
     id: string;
@@ -27,8 +28,11 @@ export async function GET(nextRequest:Request)
     {
         flag = false;
         const completedTodoAfterOneDay = todos.filter((each)=> each.completed && (new Date().getTime() - new Date(each.updateTime ?? "").getTime()) > 24*60*60*1000)
-        console.log(new Date().getTime());
-        // console.log(completedTodoAfterOneDay);
+        const compressedTodos=completedTodoAfterOneDay?.map((each)=> ({
+            id:each.id,
+            compressedTodo:zlib.gzipSync(JSON.stringify(each)).toString("base64"),
+            deletedStamp:new Date(each.updateTime)
+        }))
         if(completedTodoAfterOneDay.length > 0)
         {
             try{
@@ -41,7 +45,7 @@ export async function GET(nextRequest:Request)
                 const remainingTodos = parsedTodosData.todos.filter((each:any)=> !completedTodoAfterOneDay.some((completedEach)=> completedEach.id === each.id))
                 const updatedTodosData = {...parsedTodosData,todos:remainingTodos}
                 const parsedDeletedTodosData = JSON.parse(deletedTodosData);
-                const updatedDeletedTodosData = {...parsedDeletedTodosData,todos:[...parsedDeletedTodosData.todos,...completedTodoAfterOneDay]}
+                const updatedDeletedTodosData = {...parsedDeletedTodosData,todos:[...parsedDeletedTodosData.todos,...compressedTodos]}
                 try{
                     await Promise.all([
                         writeFile(
