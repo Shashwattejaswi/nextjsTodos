@@ -1,27 +1,6 @@
 {
   "todos": [
     {
-      "id": 63,
-      "title": "Reading Books",
-      "completed": true,
-      "createTime": "2026-04-07T16:08:44.389Z",
-      "updateTime": "2026-04-08T17:00:30.597Z"
-    },
-    {
-      "id": "fcbf20e8-fd32-4410-b1dd-03db6639a97e",
-      "title": "cooking",
-      "completed": true,
-      "createTime": "2026-04-07T16:38:34.893Z",
-      "updateTime": "2026-04-08T17:12:46.612Z"
-    },
-    {
-      "id": "014cfbfd-63d2-46ee-92d8-f89c3d475069",
-      "title": "go for grossary",
-      "completed": true,
-      "createTime": "2026-04-07T16:39:34.890Z",
-      "updateTime": "2026-04-08T17:13:04.365Z"
-    },
-    {
       "id": "643a72e6-4e48-4f53-bc12-f134c9570411",
       "title": "prepared battery of laptop",
       "completed": false,
@@ -50,13 +29,6 @@
       "updateTime": "2026-04-08T17:13:38.549Z"
     },
     {
-      "id": "47e225df-2d0b-4997-bb49-3647f18eb157",
-      "title": "store deleted todos in compressed form",
-      "completed": true,
-      "createTime": "2026-04-08T17:29:10.953Z",
-      "updateTime": "2026-04-09T16:54:22.767Z"
-    },
-    {
       "id": "3424f248-5757-4a4c-849f-dc6720cae6b2",
       "title": "add archive btn to show completed todos date wise",
       "completed": false,
@@ -69,6 +41,20 @@
       "completed": false,
       "createTime": "2026-04-08T17:30:22.127Z",
       "updateTime": "2026-04-08T17:30:22.127Z"
+    },
+    {
+      "id": "4c1aa918-441b-4db4-9b27-3ce44a6804bd",
+      "title": "send archive to todos/archive route",
+      "completed": true,
+      "createTime": "2026-04-10T17:47:37.868Z",
+      "updateTime": "2026-04-10T18:28:20.749Z"
+    },
+    {
+      "id": "f83b8309-f72b-4ecb-9d7a-79dd968abe8e",
+      "title": "testing",
+      "completed": true,
+      "createTime": "2026-04-10T17:51:13.849Z",
+      "updateTime": "2026-04-10T17:51:28.238Z"
     }
   ]
 }
