@@ -1,9 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { FaArchive } from "react-icons/fa";
 import { MdAddCircle } from "react-icons/md";
+import { RiArrowGoBackFill } from "react-icons/ri";
 import { toast, ToastContainer } from "react-toastify";
 
 
@@ -40,7 +41,8 @@ export default function TodosLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
 
-
+const pathName = usePathname();
+const pathArray = pathName.split("/")
 const [showAddPopup, setShowAddPopup] = useState(false);
 const router = useRouter();
 
@@ -99,13 +101,17 @@ const handleArchiveClick = () =>{
 
   <button className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white text-md rounded-lg shadow-lg cursor-pointer"
    type="button"
-   onClick={()=>setShowAddPopup(true)}
+   onClick={()=>{
+    setShowAddPopup(true)
+    pathArray.at(pathArray.length-1) === "archive" && router.back()
+}}
    title="Add Todo"
    >
     <p>Add Todo</p>
     <MdAddCircle size={20}/>
     
   </button>
+  {pathArray.at(pathArray.length-1) !== "archive" ? 
   <button className="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white text-md rounded-lg shadow-lg cursor-pointer"
    type="button"
    title="Archive Todos"
@@ -114,6 +120,16 @@ const handleArchiveClick = () =>{
     <FaArchive size={20}/>
     
   </button>
+  :
+   <button className="flex items-center gap-2 px-4 py-2 bg-gray-500 text-white text-md rounded-lg shadow-lg cursor-pointer"
+   type="button"
+   title="Go Back"
+   onClick={()=>{router.back()}}
+   >
+    <RiArrowGoBackFill size={20}/>
+    
+  </button>
+  }
 </div>
   {showAddPopup && <AddPopup handleAddTodo={handleAddTodo} setShowAddPopup={setShowAddPopup} />}
   <ToastContainer position="top-right" autoClose={3000} theme="colored" />
