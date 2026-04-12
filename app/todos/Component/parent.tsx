@@ -13,7 +13,7 @@ interface Todo {
 const ParentComponent = ({data}:{data:Todo[]}) =>{
     const router = useRouter();
 
- const handleEditTodos = async(todo: Todo) =>{
+ const handleEditTodos = async(todo: Todo,bodyForPass:any) =>{
 
     if(todo.completed === true){
         return;
@@ -25,7 +25,7 @@ const ParentComponent = ({data}:{data:Todo[]}) =>{
                 headers:{
                     "Content-Type":"application/json"
                 },
-                body:JSON.stringify({completed:!todo.completed})
+                body:JSON.stringify(bodyForPass)
             });
             const data = await res.json();
             if(!res.ok){

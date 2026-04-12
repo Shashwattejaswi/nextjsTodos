@@ -6,8 +6,8 @@ export async function GET(request: Request, { params }: { params: { eachtodos: s
     const {eachtodos} = await params;
    
     console.log("eachtodos",eachtodos)
-    const todoId = parseInt(eachtodos, 10);
-    const todoObj = todos.find((each)=> each.id === todoId);
+   
+    const todoObj = todos.find((each)=> each.id === eachtodos);
 
     return Response.json(todoObj ?? null);
 }
@@ -27,7 +27,7 @@ export async function PUT ( request: Request, { params }: { params: { eachtodos:
         
         const parseJson = JSON.parse(readJSONTodos)
         console.log(parseJson.todos)
-        const updatedTodos = parseJson.todos?.map((each:any,index:number)=> each.id === eachtodos?{...each,completed:!each.completed,updateTime:new Date()}:each)
+        const updatedTodos = parseJson.todos?.map((each:any,index:number)=> each.id === eachtodos?{...each,...body,updateTime:new Date()}:each)
         const updatedJson = {...parseJson,todos:updatedTodos};
         console.log(updatedJson)
         

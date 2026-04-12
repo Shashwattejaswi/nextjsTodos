@@ -17,23 +17,23 @@
     {
       "id": "c57b872d-e952-4ffc-9454-afbd16ab2de1",
       "title": "going to sleep",
-      "completed": false,
+      "completed": true,
       "createTime": "2026-04-08T17:13:19.518Z",
-      "updateTime": "2026-04-08T17:13:19.518Z"
+      "updateTime": "2026-04-12T17:26:55.267Z"
     },
     {
       "id": "99f105e0-5880-4576-9abf-36b7ee9e5afd",
       "title": "morning bath",
-      "completed": false,
+      "completed": true,
       "createTime": "2026-04-08T17:13:38.549Z",
-      "updateTime": "2026-04-08T17:13:38.549Z"
+      "updateTime": "2026-04-12T17:37:37.019Z"
     },
     {
       "id": "3424f248-5757-4a4c-849f-dc6720cae6b2",
       "title": "add archive btn to show completed todos date wise",
-      "completed": false,
+      "completed": true,
       "createTime": "2026-04-08T17:29:52.502Z",
-      "updateTime": "2026-04-08T17:29:52.502Z"
+      "updateTime": "2026-04-12T17:30:30.576Z"
     },
     {
       "id": "20a72b7a-3f23-4707-9403-06e38f2f3356",
@@ -43,18 +43,39 @@
       "updateTime": "2026-04-08T17:30:22.127Z"
     },
     {
-      "id": "4c1aa918-441b-4db4-9b27-3ce44a6804bd",
-      "title": "send archive to todos/archive route",
-      "completed": true,
-      "createTime": "2026-04-10T17:47:37.868Z",
-      "updateTime": "2026-04-10T18:28:20.749Z"
-    },
-    {
       "id": "d738d61a-4045-4bb9-92e4-16adfbac4a6b",
       "title": "hello",
-      "completed": false,
+      "completed": true,
       "createTime": "2026-04-11T17:52:47.985Z",
-      "updateTime": "2026-04-11T17:52:47.985Z"
+      "updateTime": "2026-04-12T17:31:44.706Z"
+    },
+    {
+      "id": "65b32a68-be9b-4cb9-b92b-12f40c53b258",
+      "title": "adding something new",
+      "completed": false,
+      "createTime": "2026-04-12T17:22:46.297Z",
+      "updateTime": "2026-04-12T17:22:46.297Z"
+    },
+    {
+      "id": "3012f40e-bf91-43c1-9c0f-24c199677d36",
+      "title": "checkAfterCreateUpdateTodos(shift)",
+      "completed": false,
+      "createTime": "2026-04-12T17:49:44.313Z",
+      "updateTime": "2026-04-12T17:49:44.313Z"
+    },
+    {
+      "id": "5897a8df-7822-454f-9efb-49a4c35859d9",
+      "title": "adding note in todos",
+      "completed": false,
+      "createTime": "2026-04-12T18:02:33.953Z",
+      "updateTime": "2026-04-12T18:02:33.953Z"
+    },
+    {
+      "id": "c38fc657-ac65-4a51-8292-c963540ccdaa",
+      "title": "partial compete open with reminder",
+      "completed": false,
+      "createTime": "2026-04-12T18:03:16.588Z",
+      "updateTime": "2026-04-12T18:03:16.588Z"
     }
   ]
 }
