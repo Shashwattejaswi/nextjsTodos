@@ -32,10 +32,10 @@ const ParentComponent = ({data}:{data:Todo[]}) =>{
                 throw new Error(data.message || "Failed to update todo");
             }
             console.log(res,data)
-            toast.success("Todo updated successfully");
+            toast.success(data);
              router.refresh();
             todo.completed = !todo.completed; // Update the local state to reflect the change immediately
-            
+            return data;
                 
         }catch(err)
         {
