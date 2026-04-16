@@ -3,21 +3,51 @@
 import TodoChip from "../todoChip";
 import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/navigation";
+import Loader from "@/app/component/Loader";
+import { useState } from "react";
 
 interface Todo {
-  id: number;
+  id: string;
   title: string;
   completed: boolean;
 }
 
 const ParentComponent = ({ data }: { data: Todo[] }) => {
   const router = useRouter();
+  const [loading,setLoading] = useState(false)
+
+    const handleDeleteTodo = async (id:string)=>{
+      setLoading(true)
+      try{
+         const res = await fetch(`http://localhost:3000/api/todos/${id}`, {
+               method: "DELETE",
+               headers: {
+                 "Content-Type": "application/json",
+               },
+             });
+             const data = await res.json();
+             if (!res.ok) {
+               throw new Error(data.message || "Failed to delete todo");
+             }
+             console.log(res, data);
+             toast.success(data.message);
+             router.refresh();
+      }catch(err){
+        const error = err instanceof Error ? err.message : "failed to delete the todo"
+        console.error(error)
+        toast.error(error)
+  
+      }
+      finally{
+        setLoading(false)
+      }
+    }
 
   const handleEditTodos = async (todo: Todo, bodyForPass: any) => {
     if (todo.completed === true) {
       return;
     }
-
+    setLoading(true)
     try {
       const res = await fetch(`http://localhost:3000/api/todos/${todo.id}`, {
         method: "PUT",
@@ -38,19 +68,23 @@ const ParentComponent = ({ data }: { data: Todo[] }) => {
     } catch (err) {
       console.error("Error updating todo:", err);
     }
+    finally{
+      setLoading(false)
+    }
   };
 
   return (
     <div className="">
+      <Loader loading={loading}/>
       <h1 className="w-full text-center p-4 text-2xl font-bold">Todo List</h1>
       {/* Todo list content goes here */}
-
       <div className="w-full p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {data.map((todo: Todo) => (
           <TodoChip
             key={todo.id}
             todo={todo}
             handleEditTodos={handleEditTodos}
+            handleDeleteTodo={handleDeleteTodo}
           />
         ))}
       </div>

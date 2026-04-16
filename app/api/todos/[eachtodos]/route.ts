@@ -61,3 +61,38 @@ export async function PUT(
 
   return Response.json({ status: true, message: "Todo updated successfully" });
 }
+
+export async function DELETE(request:Request,{params}:{params:{eachtodos:string}})
+{
+  const { eachtodos } = await params;
+ 
+  console.log("eachtodos", eachtodos);
+  try{
+    const readJson = await readFile(`${process.cwd()}/app/api/todos/testData.json`,
+      "utf-8",)
+      const parseJson= JSON.parse(readJson);
+      const updatedJson = parseJson?.todos?.filter((each:any,index:number)=> String(each.id) !== String(eachtodos));
+
+      const finalTodosJson = {...parseJson,todos:updatedJson};
+      try{
+        await writeFile(`${process.cwd()}/app/api/todos/testData.json`,JSON.stringify(finalTodosJson,null,2),"utf-8");
+          return Response.json({ status: true, message: "Todo Deleted successfully" });
+
+      }catch (err) {
+      console.log(err);
+      return new Response(
+        JSON.stringify({ status: false, message: "Internal Server Error" }),
+        { status: 500, headers: { "Content-Type": "application/json" } },
+      );
+    }
+  }catch (err) {
+    console.log(err);
+    return new Response(
+      JSON.stringify({ status: false, message: "Internal Server Error" }),
+      { status: 500, headers: { "Content-Type": "application/json" } },
+    );
+  }
+
+
+
+}

@@ -6,9 +6,11 @@ import AddPopup from "../component/updateTodos";
 import { title } from "process";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 interface Todo {
-  id: number;
+  id: string;
   title: string;
   completed: boolean;
   createTime?: Date;
@@ -16,7 +18,7 @@ interface Todo {
   deletedTime?: Date;
 }
 
-const EditDeletePopUpList = ({open=false,setUpdateTodosPopUp}:{open:boolean,setUpdateTodosPopUp:React.Dispatch<React.SetStateAction<boolean | null>>}) =>{
+const EditDeletePopUpList = ({todo,open=false,setUpdateTodosPopUp,handleDeleteTodo}:{todo:Todo,open:boolean,setUpdateTodosPopUp:React.Dispatch<React.SetStateAction<boolean | null>>,handleDeleteTodo?:(id:string)=> void}) =>{
 
   if(!open)
     return 
@@ -38,11 +40,10 @@ const EditDeletePopUpList = ({open=false,setUpdateTodosPopUp}:{open:boolean,setU
         title="edit Todos"
         />,
           onClick:()=>{
-            // console.log("okk");
-            // setUpdateTodosPopUp(true)
+            console.log("okk");
+            handleDeleteTodo && handleDeleteTodo(todo.id);
           }
-      }
-].map((each,index)=>(
+      }].map((each,index)=>(
         <li key={index} onClick={each.onClick} className=" p-1 text-center text-white hover:bg-gray-400 rounded-md cursor-pointer">{each.icon}</li>
       ))}
     </ul>
@@ -52,12 +53,15 @@ const EditDeletePopUpList = ({open=false,setUpdateTodosPopUp}:{open:boolean,setU
 const TodoChip = ({
   todo,
   handleEditTodos,
+  handleDeleteTodo,
   section = "todos",
 }: {
   todo: Todo;
   handleEditTodos?: (todo: Todo, bodyForPass: any) => void;
+  handleDeleteTodo?: (id:string)=> void
   section?: "todos" | "archive";
 }) => {
+  const router = useRouter();
   const formattedCreateTime = todo.createTime
     ? new Date(todo.createTime).toLocaleString()
     : null;
@@ -79,6 +83,8 @@ const TodoChip = ({
       }
     }
   };
+
+
 
   useEffect(()=>{
     console.log(UpdateTodosPopUp)
@@ -138,7 +144,7 @@ const TodoChip = ({
           updateBeforeTodos={todo}
         />
       )}
-      <EditDeletePopUpList open={threeDotOpen} setUpdateTodosPopUp={setUpdateTodosPopUp}/>
+      <EditDeletePopUpList todo={todo} open={threeDotOpen} setUpdateTodosPopUp={setUpdateTodosPopUp} handleDeleteTodo={handleDeleteTodo}/>
     </div>
   );
 };

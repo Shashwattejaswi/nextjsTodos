@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Loader from "./Loader";
 
 const AddPopup = ({
   handleUpdateTodo,
@@ -32,6 +33,7 @@ const AddPopup = ({
       onReset={handleReset}
       className="flex items-center justify-center fixed top-0 left-0 z-15 w-full h-full bg-[#00000066] p-4 rounded-lg shadow-lg"
     >
+      
       <div className="w-1/3 bg-white p-4 rounded-md">
         <h2 className="text-xl font-bold mb-4">
           {updateBeforeTodos ? "Update " : "Add New "} Todos
